@@ -1,6 +1,6 @@
 import { createAction } from 'redux-act';
 
-export { queryRoles, fetchRole, suggestRoles, updateRole } from './roleActions';
+export { fetchRole, suggestRoles, updateRole, fetchGroups } from './roleActions';
 export { addAlert, deleteAlert, fetchAlerts } from './alertActions';
 export { queryNotifications } from './notificationActions';
 export { fetchDocumentContent, ingestDocument } from './documentActions';
@@ -14,7 +14,6 @@ export {
   queryCollections,
   queryCollectionXref,
   triggerCollectionXref,
-  decideCollectionXref,
   triggerCollectionAnalyze,
   triggerCollectionCancel,
   updateCollection,

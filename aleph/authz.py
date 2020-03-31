@@ -91,12 +91,9 @@ class Authz(object):
     def can_write_role(self, role_id):
         if not self.session_write or role_id is None:
             return False
-        if self.is_admin:
-            return True
-        try:
-            return int(role_id) in self.private_roles
-        except (ValueError, TypeError):
-            return False
+        # if self.is_admin:
+        #     return True
+        return self.id == int(role_id)
 
     def can_read_role(self, role_id):
         if self.is_admin:
@@ -113,12 +110,6 @@ class Authz(object):
     @property
     def role(self):
         return Role.by_id(self.id)
-
-    @property
-    def private_roles(self):
-        if not self.logged_in:
-            return set()
-        return self.roles.difference(Role.public_roles())
 
     def to_token(self, scope=None, role=None):
         exp = datetime.utcnow() + timedelta(days=1)

@@ -7,7 +7,6 @@ import {
 import {
   queryCollections,
   queryDiagrams,
-  queryRoles,
   queryEntities,
   queryNotifications,
   queryCollectionXref,
@@ -44,8 +43,6 @@ export default createReducer({
     error, args: { query },
   }) => resultLoadError(state, query, error),
 
-  [queryDiagrams.COMPLETE]: updateResults,
-
   [queryCollectionXref.COMPLETE]: updateResults,
 
   [queryCollectionXref.START]: (state, { query }) => resultLoadStart(state, query),
@@ -54,12 +51,5 @@ export default createReducer({
     error, args: { query },
   }) => resultLoadError(state, query, error),
 
-  [queryRoles.COMPLETE]: updateResults,
-
-  [queryRoles.START]: (state, { query }) => resultLoadStart(state, query),
-
-  [queryRoles.ERROR]: (state, {
-    error, args: { query },
-  }) => resultLoadError(state, query, error),
-
+  [queryDiagrams.COMPLETE]: updateResults,
 }, initialState);

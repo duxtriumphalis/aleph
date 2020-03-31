@@ -46,7 +46,7 @@ export class EntityDeleteDialog extends Component {
       try {
         this.setState({ blocking: true });
         await Promise.all(
-          entities.map(async entity => this.props.deleteEntity(entity.id)),
+          entities.map(async entity => this.props.deleteEntity(entity)),
         );
         showSuccessToast(intl.formatMessage(messages.delete_success));
         if (redirectOnSuccess) {

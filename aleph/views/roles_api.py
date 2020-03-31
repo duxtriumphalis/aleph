@@ -1,5 +1,4 @@
 import logging
-from banal import ensure_list
 from flask_babel import gettext
 from flask import Blueprint, request
 from itsdangerous import BadSignature
@@ -62,8 +61,7 @@ def suggest():
             'total': 0
         })
     # this only returns users, not groups
-    exclude = ensure_list(parser.excludes.get('id'))
-    q = Role.by_prefix(parser.prefix, exclude=exclude)
+    q = Role.by_prefix(parser.prefix, exclude=parser.exclude)
     result = DatabaseQueryResult(request, q, parser=parser)
     return RoleSerializer.jsonify_result(result)
 

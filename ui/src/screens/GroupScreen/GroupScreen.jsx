@@ -12,8 +12,8 @@ import Dashboard from 'src/components/Dashboard/Dashboard';
 import Screen from 'src/components/Screen/Screen';
 import CollectionIndex from 'src/components/CollectionIndex/CollectionIndex';
 import LoadingScreen from 'src/components/Screen/LoadingScreen';
-import { fetchRole, queryCollections } from 'src/actions';
-import { selectRole } from 'src/selectors';
+import { queryCollections, fetchGroups } from 'src/actions';
+import { selectGroups, selectRole } from 'src/selectors';
 
 import './GroupScreen.scss';
 
@@ -40,9 +40,9 @@ export class GroupScreen extends Component {
   }
 
   fetchIfNeeded() {
-    const { group, groupId } = this.props;
-    if (group.shouldLoad) {
-      this.props.fetchRole({ id: groupId });
+    const { groups } = this.props;
+    if (groups.shouldLoad) {
+      this.props.fetchGroups();
     }
   }
 
@@ -80,20 +80,22 @@ const mapStateToProps = (state, ownProps) => {
   const context = {
     'filter:team_id': groupId,
   };
+
   let query = Query.fromLocation('collections', location, context, 'collections')
     .limit(20);
 
   if (!query.hasSort()) {
     query = query.sortBy('created_at', 'desc');
   }
+
   return {
     query,
-    groupId,
     group: selectRole(state, groupId),
+    groups: selectGroups(state),
   };
 };
 
 export default compose(
-  connect(mapStateToProps, { fetchRole, queryCollections }),
+  connect(mapStateToProps, { fetchGroups, queryCollections }),
   injectIntl,
 )(GroupScreen);

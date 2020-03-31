@@ -11,10 +11,12 @@ export const fetchEntity = asyncActionCreator(({ id }) => async () => {
   return { id, data: response.data };
 }, { name: 'FETCH_ENTITY' });
 
+
 export const fetchEntityReferences = asyncActionCreator(({ id }) => async () => {
   const response = await endpoint.get(`entities/${id}/references`);
   return { id, data: response.data };
 }, { name: 'FETCH_ENTITY_REFERENCES' });
+
 
 export const fetchEntityTags = asyncActionCreator(({ id }) => async () => {
   const response = await endpoint.get(`entities/${id}/tags`);
@@ -33,9 +35,9 @@ export const updateEntity = asyncActionCreator(({ entity, collectionId }) => asy
   return response.data;
 }, { name: 'UPDATE_ENTITY' });
 
-export const deleteEntity = asyncActionCreator(entityId => async () => {
-  await endpoint.delete(`entities/${entityId}`, {});
-  return { id: entityId };
+export const deleteEntity = asyncActionCreator(entity => async () => {
+  await endpoint.delete(`entities/${entity.id}`, {});
+  return { id: entity.id };
 }, { name: 'DELETE_ENTITY' });
 
 export const fetchEntityMapping = asyncActionCreator(({ id, collection }) => async () => {

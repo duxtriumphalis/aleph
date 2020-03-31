@@ -51,12 +51,12 @@ class QueryParser(object):
         return self.prefixed_items('filter:')
 
     @property
-    def excludes(self):
-        return self.prefixed_items('exclude:')
-
-    @property
     def empties(self):
         return self.prefixed_items('empty:')
+
+    @property
+    def exclude(self):
+        return self.getlist('exclude')
 
     @property
     def sorts(self):
@@ -117,7 +117,7 @@ class QueryParser(object):
             'filters': {key: list(val) for key, val in self.filters.items()},
             'sorts': self.sorts,
             'empties': {key: list(val) for key, val in self.empties.items()},
-            'excludes': {key: list(val) for key, val in self.excludes.items()},
+            'exclude': self.exclude,
         }
         return parser
 

@@ -9,8 +9,8 @@ Xref:
       $ref: '#/components/schemas/Entity'
     match:
       $ref: '#/components/schemas/Entity'
-    match_collection:
-      $ref: '#/components/schemas/Collection'
+    match_collection_id:
+      type: string
     schema:
       type: string
       format: schema
@@ -39,12 +39,6 @@ XrefResponse:
         $ref: '#/components/schemas/Xref'
       type: array
 
-XrefDecide:
+XrefGenerate:
   type: object
-  properties:
-    context_id:
-      type: string
-      nullable: true
-    decision:
-      type: boolean
-      nullable: true
+  properties: {}
